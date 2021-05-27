@@ -1,0 +1,20 @@
+.roja{
+    background-color: #C62828;
+    margin:1rem;
+}
+
+.verde{
+    background-color: #00B74A ;
+    margin:1rem;
+}
+
+.amarillo{
+    background-color: #FFCA28;
+    margin:1rem;
+}
+
+.texto{
+    font-family: Berlin Sans FB;
+    font-size: 2rem;
+    color: white;
+}

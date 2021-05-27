@@ -1,0 +1,32 @@
+<div >
+    <div class="row justify-content-center mr-3 ml-3">
+      <form class="text-center" #evento="ngForm" name="evento" (ngSubmit)="onSubmit(evento)">
+        
+        <input  type="text" required #title="ngModel" [(ngModel)]="feature.title"  id="title" class="fadeIn second w-100" name="title" placeholder="Nombre del Servicio/evento">
+        <br><span *ngIf="!title.valid && title.touched">Campo Obligatorio</span>
+      
+        <input  type="text" required #preferences="ngModel" [(ngModel)]="feature.preferences"  id="preferences" class="fadeIn second w-100" name="preferences" placeholder="Preferencias del servicio/evento">
+        <br><span *ngIf="!preferences.valid && preferences.touched">Campo Obligatorio</span>
+        
+        <textarea type="text" required #desc="ngModel" [(ngModel)]="feature.desc" id="desc" class="fadeIn second w-100" name="desc" placeholder="Descripción del evento/Servicio"></textarea>
+        <br><span *ngIf="!desc.valid && desc.touched">Campo Obligatorio</span>
+        
+        <input type="text" #slogan="ngModel" [(ngModel)]="feature.slogan" required id="slogan"  class="fadeIn second w-100" name="slogan" placeholder="slogan del servicio/evento">
+        <br><span *ngIf="!slogan.valid && slogan.touched">Campo Obligatorio</span>
+
+        <input type="text" #price="ngModel" [(ngModel)]="feature.price" required id="price"  class="fadeIn second w-100" name="price" placeholder="Precio del Evento/Servicio">
+        <br><span *ngIf="!price.valid && price.touched">Campo Obligatorio</span>
+        
+        <select class="fadeIn second w-100" #type="ngModel" [(ngModel)]="feature.type" required id="role" name="type" >
+            <option>Evento</option>
+            <option>Servicio</option>
+        </select><br>
+        <span *ngIf="!type.valid && type.touched">Campo Obligatorio</span><br>
+        
+        <input type="file" (change)="fileChange4($event)"  required id="file"  class="fadeIn second form-control" name="file"><br>
+        <input type="submit" style="width: 85%;" class="fadeIn fourth btn w-100" value="Registrar">
+      </form>
+    </div>
+  </div>
+
+  <notifier-container></notifier-container>

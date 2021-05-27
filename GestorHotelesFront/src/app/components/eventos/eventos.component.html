@@ -1,0 +1,16 @@
+<div id="formContent" [@fadeIn] *ngFor="let optionEvent of features" style="align-items: center; justify-content: center;margin: auto;" class="col-lg-9 row mb-4">
+    <div class="col-lg-6">
+        <img width="300" style="max-height: 222px;" class="img-fluid" src="{{uri+'getImage/'+optionEvent.img}}">
+    </div>
+    <div class="col-lg-6 ">
+        <h2 class="mt-4">{{optionEvent.title}}</h2>
+        <p class="Disponible mb-2">{{optionEvent.preferences}}</p>
+        <p class="Disponible mb-2">Precio del {{optionEvent.type}} :{{optionEvent.price}}</p>
+        <p class="text-muted text-left mb-2">{{optionEvent.desc}}</p>
+        <p class="text-muted text-left mb-2">{{optionEvent.type}}</p>
+        <h2 class="mt-4 mb-2">{{optionEvent.slogan}}</h2>
+        <button  *ngIf="token != null" (click)="saveFeature(optionEvent._id)" class="fadeIn fourth mb-2"> Adquirir</button>
+        <button  *ngIf="token == null" routerLink="../../login" class="fadeIn fourth mb-2"> Inicia Sesión</button>
+    </div>
+</div>
+<notifier-container></notifier-container>

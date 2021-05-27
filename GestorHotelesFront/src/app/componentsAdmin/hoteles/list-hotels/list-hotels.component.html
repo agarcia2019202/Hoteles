@@ -1,0 +1,85 @@
+<div class="col-lg-12 mt-4 mb-4" >
+    <div id="formContent" *ngFor="let optionsHotel of hotels" style="align-items: center; justify-content: center;margin: auto;" class="col-lg-11 mb-4 row">
+        <div class="col-lg-6">
+            <img width="300" class="img-fluid" src="{{uri+'getImage/'+optionsHotel.images[0].image}}">
+        </div>
+        <div class="col-lg-6">
+            <h2 class="mt-4">{{optionsHotel.name}}</h2>
+            <p class="Disponible" *ngIf="optionsHotel.rooms.length">Habitaciones Disponibles</p>
+            <p class="noDisponible" *ngIf="!optionsHotel.rooms.length">Habitaciones No Disponibles</p>
+            <p class="text-muted text-left" *ngIf="optionsHotel.rooms.length">{{optionsHotel.rooms.priceRoom}}</p>
+            <p class="text-muted text-left">{{optionsHotel.description}}</p>
+            <p class="text-muted text-left">{{optionsHotel.descAddress}}</p>
+            <div class="text-left mb-2">    
+                <div class="d-flex mb-1">    
+                    <button  data-toggle="modal" (click)="selectHotel(optionsHotel)" data-target="#editModal" style="color: white;" class=" btn btn-warning mr-1" >Editar</button>
+                    <button  data-toggle="modal" (click)="selectHotel(optionsHotel)" data-target="#agregarModal"  class=" btn btn-primary" >Agregar Habitación</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--  modal para editar -->
+<div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="EditLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="EditLabel">Editar Hotel</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+            <form class="row justify-content-center mr-3 ml-3">
+                
+              <input type="text" id="name" #name="ngModel" [(ngModel)]="hotelSelected.name" class="fadeIn second " name="name" placeholder="Nombre del Hotel">
+              <input type="text" id="phone" #phone="ngModel" [(ngModel)]="hotelSelected.phone" class="fadeIn second " name="phone" placeholder="Telefono del Hotel">
+                
+              <input type="text" id="email" #phone="ngModel" [(ngModel)]="hotelSelected.email"   class="fadeIn second" name="email" placeholder="Email">
+              
+              <textarea class="fadeIn second" id="descAddress" #descAddress="ngModel" [(ngModel)]="hotelSelected.descAddress" name="descAddress" placeholder="Dirección del Hotel"></textarea>
+              
+            </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="button" style="color: white;" (click)="editHotel()" data-dismiss="modal" class="btn btn-warning">Editar Hotel</button>
+        </div>
+      </div>
+    </div>
+</div>
+
+<!--  modal para Agregar habitación -->
+<div class="modal fade" id="agregarModal" tabindex="-1" role="dialog" aria-labelledby="AgregarLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="AgregarLabel">Agregar Habitación</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+            <form class="row justify-content-center mr-3 ml-3">
+                
+              <input type="text" #nameRoom="ngModel" [(ngModel)]="room.nameRoom" id="nameRoom" class="fadeIn second W-100" name="nameRoom" placeholder="Nombre de la habitación">
+              <input type="text" #priceRoom="ngModel" [(ngModel)]="room.priceRoom" id="priceRoom" class="fadeIn second W-100" name="priceRoom" placeholder="Precio de la habitación">
+              <input type="text" #amountRoom="ngModel" [(ngModel)]="room.amountRoom" id="amountRoom" class="fadeIn second W-100" name="amountRoom" placeholder="Cantidad de habitaciones">
+              <textarea class="fadeIn second" #descRoom="ngModel" [(ngModel)]="room.descRoom" id="descRoom" name="descRoom"  placeholder="Breve descripción de la habitación"></textarea>
+              <select #typeRoom="ngModel" [(ngModel)]="room.typeRoom" name="typeRoom"  class="fadeIn second w-100">
+                <option>SUITE</option>
+                <option>PREMIUM</option>
+                <option>NORMAL</option>
+              </select>
+              <input type="file" (change)="fileChange4($event)"  class="fadeIn third form-control" name="login" ><br>
+            </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="button" (click)="setRoom()" class="btn btn-primary" data-dismiss="modal">Agregar Habitación</button>
+        </div>
+      </div>
+    </div>
+</div>
+
+<notifier-container></notifier-container>

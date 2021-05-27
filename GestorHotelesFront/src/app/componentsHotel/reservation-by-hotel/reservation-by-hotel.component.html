@@ -1,0 +1,31 @@
+<div class="row pb-5 container justify-content-center m-0">
+    <div class="w-100">
+      <div class="wrapper fadeInDown">
+        <div id="formContent" class="col-lg-9">
+        <h2 class="titulo2">Buscar Reservaciones</h2>
+        <form class="form-inline d-flex pb-3" style="align-items: center; justify-content: center;">
+            <input type="text" id="search" [(ngModel)]="search" class="fadeIn mr-2 second col-lg-6 mb-2" name="search" placeholder="Usuario">
+            <input type="submit" class="fadeIn fourth col-lg-4 mr-2 ml-2" value="Buscar">
+        </form>
+        </div>
+      </div>
+    </div>
+    <div class="card mr-2 mb-2" style="width: 17rem;" *ngFor="let option of reservations | searchReservation: search">
+        <div class="card-body">
+        <h6 class="card-subtitle mb-2 text-muted">fecha de llegada: {{option.dateEntry}}</h6>
+        <h6 class="card-subtitle mb-2 text-muted">fecha de salida: {{option.dateExit}}</h6>
+        <h5 class="card-title">Nombre de Usuario: {{option.users[0].name}}</h5>
+        <h6 class="card-subtitle mb-2 text-muted">Correo Electronico: {{option.users[0].email}}</h6>
+        <p class="card-text">Usuario: {{option.users[0].username}}</p>
+        <h6 class="card-subtitle mb-2 text-muted">Telefono: {{option.users[0].phone}}</h6>
+        <div *ngFor="let room of rooms">
+            <p class="card-text" *ngIf="room._id == option.rooms[0]">Nombre de Habitación {{room.nameRoom}}</p>
+        </div>
+        <p class="card-text text-success" *ngIf="option.status =='EN PROCESO'">Estado: {{option.status}}</p>
+        <p class="card-text text-warning" *ngIf="option.status =='EN CURSO'">Estado: {{option.status}}</p>
+        <a style="color: white;" *ngIf="option.status =='EN PROCESO'" (click)="updateReservation(option._id)" class="btn btn-warning mb-2" >EN CURSO</a>
+        
+        </div>
+    </div>
+</div>
+<notifier-container></notifier-container>

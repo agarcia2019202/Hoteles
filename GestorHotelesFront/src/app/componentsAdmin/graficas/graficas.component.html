@@ -1,0 +1,28 @@
+<div class="row container w-100 justify-content-center m-0 pt-4">
+    <div class="col-lg-3 text-center roja">
+        <span class="texto">Total de Usuarios:</span>
+        <br>
+        <span class="texto">{{count}}</span>
+    </div>
+    <div class="col-lg-3 text-center verde">
+        <span class="texto">Reservaciones:</span>
+        <br>
+        <span class="texto">{{countReservation}}</span>
+    </div>
+    
+    <!-- <div class="col-lg-3 text-center amarillo">
+        <span class="texto">Hotel Más Solicitado:</span>
+        <br>
+        <span class="texto">{{bestHotel}}</span>
+    </div> -->
+</div>
+<div style="display: block;" *ngIf="bestHotel != null">
+    <canvas baseChart class="chart"
+      [datasets]="barChartData"
+      [labels]="barChartLabels"
+      [options]="barChartOptions"
+      [plugins]="barChartPlugins"
+      [legend]="barChartLegend"
+      [chartType]="barChartType">
+    </canvas>
+</div>

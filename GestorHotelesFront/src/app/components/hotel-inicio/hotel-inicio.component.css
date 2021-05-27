@@ -1,0 +1,35 @@
+body {
+    font-family: "Poppins", sans-serif;
+    padding: 0;
+    -webkit-box-shadow: 0 30px 60px 0 rgba(0,0,0,0.3);
+    box-shadow: 0 30px 60px 0 rgba(0,0,0,0.3);
+}
+
+
+  .titulo2 {
+    text-align: center;
+    font-size: 16px;
+    font-weight: 600;
+    text-transform: uppercase;
+    display:inline-block;
+    margin: 40px 8px 10px 8px; 
+    color: #E53935;
+  }
+  
+  .slogan{
+    color: #932323;
+    font-family: Berlin Sans FB;
+    font-size: 1.5rem;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    width: 100%;
+  }
+
+  .nombreHotel{
+    color: #C62828;
+    font-size: 2.5rem;
+    display: flex;
+    justify-content: center;
+    width: 100%;
+  }

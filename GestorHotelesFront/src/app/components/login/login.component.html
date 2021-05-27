@@ -1,0 +1,23 @@
+<app-carousel class="car"></app-carousel>
+<body class="container pos pb-5 pt-5">
+  <div class="wrapper fadeInDown mb-5 mt-3">
+    <div id="formContent">
+      <div class="fadeIn first mt-2">
+        <img src="../../../assets/logo.png" id="icon" alt="User Icon" />
+        <h1>Iniciar Sesión</h1>
+      </div>
+  
+      <form #login="ngForm" (ngSubmit)="onSubmit()">
+        <input type="text" #username="ngModel" [(ngModel)]="user.username" required id="username" class="fadeIn second" name="username" placeholder="Username">
+        <br><span *ngIf="!username.valid && username.touched">Campo Obligatorio</span>
+        <input type="password" #password="ngModel" [(ngModel)]="user.password" required id="password" class="fadeIn third" name="password" placeholder="Contraseña">
+        <br><span *ngIf="!password.valid && password.touched">Campo Obligatorio</span><br>
+        <input type="submit" href="" class="fadeIn fourth" value="Iniciar sesion">
+      </form>
+      <div id="formFooter">
+        <a class="underlineHover" routerLink="../register">¿No tienes una cuenta?</a>
+      </div>
+    </div>
+  </div>
+</body>
+<notifier-container></notifier-container>

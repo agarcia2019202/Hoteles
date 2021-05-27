@@ -1,0 +1,147 @@
+<div class="container row m-0 p-0">
+    <div class="col-lg-3 color margin">
+        <nav class="navbar navbar-expand-lg  w-100">
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav1"
+              aria-controls="navbarNav" style="color: white;" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon " style="color: white;"><i class="fas fa-bars"></i></span>
+            </button>
+            <div class="col-lg-12">
+                <div class="collapse navbar-collapse" id="navbarNav1">
+                    <ul class="navbar-nav d-block">
+                        <li class="nav-item">
+                            <a class="nav-link" (click)="status(1)">Usuarios Registrados</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" (click)="status(2)">Agregar Usuario</a>
+                        </li>
+                    </ul>
+                    
+                </div>
+                
+            </div>
+            
+        </nav>
+    </div>
+    <div class="col-lg-9 mt-4 mb-4 row justify-content-center mr-0 ml-0" *ngIf="sidebarStatus==1">
+        <div class="card mr-2 ml-2 mb-2" *ngFor="let userOption of users" style="width: 15rem;">
+            <div class="card-body">
+              <h5 class="card-title">{{userOption.name}}</h5>
+              <h6 class="card-subtitle mb-2 text-muted">Correo Electronico: {{userOption.email}}</h6>
+              <p class="card-text">Usuario: {{userOption.username}}</p>
+              <h6 class="card-subtitle mb-2 text-muted">Telefono: {{userOption.phone}}</h6>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-9 mt-4 mb-4" *ngIf="sidebarStatus==2">
+      <div class="row justify-content-center mr-3 ml-3">
+        <form class="text-center" #saveUser="ngForm" (ngSubmit)="onSubmit(saveUser)">
+            <div class="w-100 row justify-content-center m-0 p-0">
+                <div class="col-lg-12">
+                  <input type="text" required #name="ngModel" [(ngModel)]="user.name" id="name" class="fadeIn second " name="name" placeholder="Nombre">
+                  <br><span *ngIf="!name.valid && name.touched">Campo Obligatorio</span>
+                </div>
+                <div class="col-lg-12">
+                  <input type="text" required #lastname="ngModel" [(ngModel)]="user.lastname" id="lastname" class="fadeIn second " name="lastname" placeholder="Apellido">
+                  <br><span *ngIf="!lastname.valid && lastname.touched">Campo Obligatorio</span>
+                </div>
+            </div>
+          <input type="text" required id="phone" #phone="ngModel" [(ngModel)]="user.phone" class="fadeIn second col-lg-12" name="phone" placeholder="Teléfono">
+          <br><span *ngIf="!phone.valid && phone.touched">Campo Obligatorio</span>
+          <input type="text" required id="username" #username="ngModel" [(ngModel)]="user.username" class="fadeIn second col-lg-12" name="login" placeholder="username">
+          <br><span *ngIf="!username.valid && username.touched">Campo Obligatorio</span>
+          <input type="text" required id="email" #email="ngModel" [(ngModel)]="user.email" class="fadeIn second col-lg-12" name="email" placeholder="Email">
+          <br><span *ngIf="!email.valid && email.touched">Campo Obligatorio</span>
+          <input type="password" required id="password" #password="ngModel" [(ngModel)]="user.password" class="fadeIn second col-lg-12" name="password" placeholder="Contraseña">
+          <br><span *ngIf="!password.valid && password.touched">Campo Obligatorio</span>
+          <select class="fadeIn second col-lg-12" required id="role" name="role" #role="ngModel" [(ngModel)]="user.role">
+              <option *ngFor="let optionRole of roles" [value]="optionRole">{{optionRole}}</option>
+          </select><br>
+          <span *ngIf="!role.valid && role.touched">Campo Obligatorio</span><br>
+          <input type="submit" style="width: 85%;" class="fadeIn fourth btn col-lg-12" value="Registrar">
+        </form>
+      </div>
+    </div>
+</div>
+
+<!--  modal para editar -->
+<div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="EditLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="EditLabel">Editar Hotel</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+            <form class="row justify-content-center mr-3 ml-3">
+                
+                <input type="text" id="login" class="fadeIn second " name="login" placeholder="Nombre del Hotel">
+                <input type="text" id="login" class="fadeIn second " name="login" placeholder="Telefono del Hotel">
+                
+              <input type="text" id="login" class="fadeIn second" name="login" placeholder="Email">
+              <select class="fadeIn second" >
+                  <option>Administrador del Hotel</option>
+                  <option>Datos</option>
+                  <option>Datos</option>
+              </select>
+              <textarea class="fadeIn second"  placeholder="Dirección del Hotel"></textarea>
+              <input type="file"  class="fadeIn third" name="login" placeholder="password"><br>
+            </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="button" style="color: white;" class="btn btn-warning">Editar Hotel</button>
+        </div>
+      </div>
+    </div>
+</div>
+
+<!--  modal para Agregar habitación -->
+<div class="modal fade" id="agregarModal" tabindex="-1" role="dialog" aria-labelledby="AgregarLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="AgregarLabel">Agregar Habitación</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+            <form class="row justify-content-center mr-3 ml-3">
+                
+                <input type="text" id="login" class="fadeIn second " name="login" placeholder="Nombre de la habitación">
+                <input type="text" id="login" class="fadeIn second " name="login" placeholder="Precio de la habitación">
+              <textarea class="fadeIn second"  placeholder="Breve descripción de la habitación"></textarea>
+              <input type="file"  class="fadeIn third" name="login" placeholder="password"><br>
+            </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary">Agregar Habitación</button>
+        </div>
+      </div>
+    </div>
+</div>
+
+<!--  modal para eliminar -->
+<div class="modal fade" id="eliminarModal" tabindex="-1" role="dialog" aria-labelledby="EliminarLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="EliminarLabel">Eliminar Hotel</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <span class="text-danger">¿Está seguro que desea eliminar este hotel?</span>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-danger">Eliminar Hotel</button>
+        </div>
+      </div>
+    </div>
+</div>
+<notifier-container></notifier-container>

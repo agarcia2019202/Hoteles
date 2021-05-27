@@ -1,0 +1,64 @@
+<div >
+    <div id="formContent" *ngFor="let optionsFeatures of features" style="align-items: center; justify-content: center;margin: auto;" class="col-lg-11 row mb-3">
+        <div class="col-lg-6 mt-2">
+            <img width="300" class="img-fluid" style="max-height: 222px!important ; "  src="{{uri+'getImageFeature/'+optionsFeatures.img}}">
+        </div>
+        <div class="col-lg-6">
+            <h2 class="mt-4 mb-2">{{optionsFeatures.title}}</h2>
+            <p class="Disponible mb-2">{{optionsFeatures.preferences}}</p>
+            <p class="Disponible mb-2">Costo: {{optionsFeatures.price}}</p>
+            <p class="text-muted text-left mb-2">{{optionsFeatures.desc}}</p>
+            <h2 class="text-muted text-center mb-2">{{optionsFeatures.slogan}}</h2>
+            <div class="text-left mb-2">    
+                
+                <div class="d-flex mb-1">    
+                    <button style="color: white;" data-toggle="modal" (click)="selectFeature(optionsFeatures)" data-target="#editModal" class="btn btn-warning mr-1" >Editar</button>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--  modal para editar -->
+<div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="EditLabel" aria-hidden="true">
+<div class="modal-dialog" role="document">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h5 class="modal-title" id="EditLabel">Editar Evento/Servicio</h5>
+      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+        <form class="row justify-content-center mr-3 ml-3">
+          <input  type="text" required #title="ngModel" [(ngModel)]="featureSelected.title"  id="title" class="fadeIn second w-100 mb-2" name="title" placeholder="Nombre del Servicio/evento">
+          <br><span *ngIf="!title.valid && title.touched">Campo Obligatorio</span>
+        
+          <input  type="text" required #preferences="ngModel" [(ngModel)]="featureSelected.preferences"  id="preferences" class="fadeIn second w-100 mb-2" name="preferences" placeholder="Preferencias del servicio/evento">
+          <br><span *ngIf="!preferences.valid && preferences.touched">Campo Obligatorio</span>
+          
+          <textarea type="text" required #desc="ngModel" [(ngModel)]="featureSelected.desc" id="desc" class="fadeIn second w-100 mb-2" name="desc" placeholder="Descripción del evento/Servicio"></textarea>
+          <br><span *ngIf="!desc.valid && desc.touched">Campo Obligatorio</span>
+          
+          <input type="text" #slogan="ngModel" [(ngModel)]="featureSelected.slogan" required id="slogan"  class="fadeIn second w-100 mb-2" name="slogan" placeholder="slogan del servicio/evento">
+          <br><span *ngIf="!slogan.valid && slogan.touched">Campo Obligatorio</span>
+  
+          <input type="text" #price="ngModel" [(ngModel)]="featureSelected.price" required id="price"  class="fadeIn second w-100 mb-2" name="price" placeholder="Precio del Evento/Servicio">
+          <br><span *ngIf="!price.valid && price.touched">Campo Obligatorio</span>
+          
+          <select class="fadeIn second w-100 mb-2" #type="ngModel" [(ngModel)]="featureSelected.type" required id="role" name="type" >
+              <option>Evento</option>
+              <option>Servicio</option>
+          </select><br>
+          <span *ngIf="!type.valid && type.touched">Campo Obligatorio</span><br>
+        </form>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      <button type="button" style="color: white;" data-dismiss="modal" (click)="editFeature()" class="btn btn-warning">Editar Evento/Servicio</button>
+    </div>
+  </div>
+</div>
+</div>
+<notifier-container></notifier-container>

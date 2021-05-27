@@ -1,0 +1,66 @@
+<div class="container row m-0 p-0">
+    <div class="col-lg-3 color margin">
+        <nav class="navbar navbar-expand-lg  w-100">
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav1"
+          aria-controls="navbarNav" style="color: white;" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon " style="color: white;"><i class="fas fa-bars"></i></span>
+        </button>
+            <div class="col-lg-12">
+                <div class="collapse navbar-collapse" id="navbarNav1">
+                    <ul class="navbar-nav d-block">
+                        <li class="nav-item">
+                            <a class="nav-link" (click)="status(1)">Hoteles Registrados</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" (click)="status(2)">Agregar Hotel</a>
+                        </li>
+                    </ul>
+                    
+                </div>
+                
+            </div>
+            
+        </nav>
+    </div>
+    
+    <div class="col-lg-9 mt-4 mb-4" *ngIf="sidebarStatus==2">
+      <div class="row justify-content-center mr-3 ml-3">
+        <form #agregarHotel="ngForm" id="agregarHotel" (ngSubmit)="onSubmit(agregarHotel)" class="text-center row justify-content-center">
+            <div class="col-lg-12 row justify-content-center m-0 p-0">
+                <input required #name="ngModel" [(ngModel)]="hotel.name" type="text" id="name" class="fadeIn second w-100" name="name" placeholder="Nombre del Hotel">
+                <span *ngIf="!name.valid && name.touched">Campo Obligatorio</span>
+                <input required #phone="ngModel" [(ngModel)]="hotel.phone" type="number" id="phone" class="fadeIn second w-100" name="phone" placeholder="Telefono del Hotel">
+                <span *ngIf="!phone.valid && phone.touched">Campo Obligatorio</span>
+            </div>
+          <input required #email="ngModel" [(ngModel)]="hotel.email" type="email" id="email" class="fadeIn second w-100" name="email" placeholder="Email">
+          <span *ngIf="!email.valid && email.touched">Campo Obligatorio</span>
+         
+          <select  class="fadeIn second w-100" #addres="ngModel" [(ngModel)]="hotel.addres" id="addres"  name="addres">
+            <option>Guatemala</option>
+            <option>Izabal</option>
+            <option>Peten</option>
+            <option>Retalhuleu</option>
+            <option>Sacatepequez</option>
+            <option>Solola</option>
+          </select>
+          <span *ngIf="!addres.valid && addres.touched">Campo Obligatorio</span>
+          <textarea required #descAddress="ngModel" [(ngModel)]="hotel.descAddress" class="fadeIn second w-100" name="descAddress" id="descAddress" form="agregarH" placeholder="Dirección del Hotel"></textarea>
+          <span *ngIf="!descAddress.valid && descAddress.touched">Campo Obligatorio</span>
+          <textarea required #description="ngModel" [(ngModel)]="hotel.description" class="fadeIn second w-100" name="description" id="description" form="agregarH" placeholder="Descripción..."></textarea>
+          <span *ngIf="!description.valid && description.touched">Campo Obligatorio</span>
+          <select  class="fadeIn second w-100" name="selectUser" #users="ngModel" [(ngModel)]="userSelected.username" >
+              <option *ngFor="let option of usersAdmin" [value]="option.username">{{option.username}}</option>
+          </select>
+          <input type="file" (change)="fileChange($event)" class="fadeIn third form-control mb-2"  >
+          <input type="file" (change)="fileChange2($event)"  class="fadeIn third form-control mb-2"  >
+          <input type="file" (change)="fileChange3($event)"  class="fadeIn third form-control mb-2"  >
+          <input type="submit" class="fadeIn fourth btn" value="Registrar">
+        </form>
+      </div>
+    </div>
+    <app-list-hotels *ngIf="sidebarStatus==1" class="col-lg-9 mt-4 mb-4"></app-list-hotels>
+</div>
+
+
+
+<notifier-container></notifier-container>

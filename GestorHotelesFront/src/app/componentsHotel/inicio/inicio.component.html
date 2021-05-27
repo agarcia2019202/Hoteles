@@ -1,0 +1,87 @@
+
+<div>
+    <div class="row container w-100 justify-content-center m-0 pt-4">
+        <div class="col-lg-3 text-center roja row">
+            <span class="texto">Habitaciones Disponibles:</span>
+            <span class="texto">{{available}}</span>
+        </div>
+        <div class="col-lg-3 text-center verde row">
+            <span class="texto">Reservaciones:</span>
+            <span class="texto">{{reservCount}}</span>
+        </div>
+        
+        <div class="col-lg-3 text-center amarillo row">
+            <span class="texto">Huéspedes:</span>
+            <span class="texto">{{guest}}</span>
+        </div>
+    </div>
+    <div class="w-100">
+        
+        <div class="w-100">
+            <div class="wrapper fadeInDown">
+                <div id="formContent" class="col-lg-9">
+                <h2 class="titulo2">Buscar Facturas</h2>
+                <form class="form-inline d-flex pb-3" style="align-items: center; justify-content: center;">
+                    <input type="text" id="search" [ngModel]="search" class="fadeIn mr-2 second col-lg-6 mb-2" name="search" placeholder="Usuario">
+                    <input type="submit" class="fadeIn fourth col-lg-4 mr-2 ml-2" value="Buscar">
+                </form>
+                </div>
+            </div>
+        </div>
+        <div class="row pb-5 container justify-content-center m-0">
+            <div class="card mr-2 mb-2" *ngFor="let option of invoiceFac | searchFac:search" style="width: 20rem;">
+                <div class="card-body">
+                    <h5 class="card-title">Factura No: {{option.number}}</h5>
+                    <h5 class="card-title">Serie: {{option.serie}}</h5>
+                    <p class="card-text">{{option.date}}</p>
+                    <div class="col-lg-12 d-flex">
+                        <p class="card-text mr-2">{{option.users[0].name}}</p>
+                        <p class="card-text">{{option.users[0].lastname}}</p>
+                        
+                    </div>
+                    <div class="col-lg-12 row text-center" >
+                        <div class="col-lg-6">
+                          <p class="card-text text-success">Hospedaje:</p>
+                        </div>
+                        <div class="col-lg-6">
+                          <p class="card-text text-success">precio</p>
+                        </div>
+                    </div>
+                    <div class="col-lg-12 m-0 row text-center" *ngFor="let resrv1 of reservations" >
+                      <div  class="col-lg-12 row" *ngFor="let room of rooms">
+                        <div class="col-lg-6" *ngIf ="resrv1.rooms[0] == room._id && resrv1._id == option.reservations[0]">
+                          <p class="card-text">{{room.nameRoom}}</p>
+                      </div>
+                        <div class="col-lg-6"   *ngIf ="resrv1.rooms[0] == room._id && resrv1._id == option.reservations[0]">
+                          <p class="card-text">{{room.priceRoom}}</p>
+                        </div>
+                      </div>
+                  </div>
+                    <div class="col-lg-12 row text-center">
+                      <div class="col-lg-6">
+                        <p class="card-text text-success">Servicios:</p>
+                      </div>
+                      <div class="col-lg-6 text-success">
+                        <p class="card-text">precio</p>
+                      </div>
+                    </div>
+                    <div class="col-lg-12 row text-center" *ngFor="let optionF of option.features">
+                      <div class="col-lg-6">
+                        <p class="card-text">{{optionF.title}}</p>
+                      </div>
+                      <div class="col-lg-6">
+                        <p class="card-text">{{optionF.price}}</p>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-lg-12">
+                    <p class="card-text text-danger" *ngIf="option.status == 'PENDIENTE'">{{option.status}}</p>
+                    <p class="card-text text-success mb-2" *ngIf="option.status == 'PAGADA'">{{option.status}}</p>
+                  </div>
+                  <a (click)="payInvoice(option._id, option.users[0]._id)" *ngIf="option.status !='PAGADA'" style="color: white;" class="btn btn-warning mb-2">Marcar cómo pagada</a>
+            </div>
+        </div>
+    </div>
+</div>  
+  
+    <notifier-container></notifier-container>

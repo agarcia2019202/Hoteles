@@ -1,0 +1,40 @@
+<div style="height: 4rem; background-color: #700707;">
+
+</div>
+<body class="container pos" style="padding-top: 15px;">
+    
+        
+        <div class="col-lg-9 row" style="align-items: center; justify-content: center;margin: auto;" >
+            <div class="col-lg-8">    
+                    
+                <form class="form-inline">
+                    <input class="form-control mr-sm-2 mr-2"  [(ngModel)]="search" name="search" style="width: 70%;" type="search" placeholder="Busqueda Por Nombre" aria-label="Search">
+                    <button class="fadeIn fourth btn  botones mb-2"  style="width: 25%; padding: 15px !important; margin: 0;" type="submit"><i class="fas fa-search"></i></button>
+                </form>
+                    
+            </div>
+        </div>
+        <div class="mt-4 text-center color">
+            <h2>Hoteles</h2>
+        </div>
+        <div class="wrapper" *ngFor="let optionHotel of hotels | search: search">
+            <div id="formContent" style="align-items: center; justify-content: center;margin: auto;" class="col-lg-9 row pt-2">
+                <div class="col-lg-6">
+                    <img width="300" class="img-fluid" src="{{uri+'getImage/'+optionHotel.images[0].image}}">
+                </div>
+                <div class="col-lg-6">
+                    <h2 class="mt-4">{{optionHotel.name}}</h2>
+                    <p class="Disponible" *ngIf="optionHotel.rooms.length">Habitaciones Disponibles</p>
+                    <p class="noDisponible" *ngIf="!optionHotel.rooms.length">Habitaciones No Disponibles</p>
+                    <p class="text-muted text-left" *ngIf="optionHotel.rooms.length">Precios de: {{optionHotel.rooms[0].priceRoom}}</p>
+                    <p class="text-muted text-left">{{optionHotel.description}}</p>
+                    <p class="text-muted text-left">{{optionHotel.descAddress}}</p>
+                    <input type="submit" routerLink="../HotelInicio/{{optionHotel._id}}" class="fadeIn fourth" value="Más info">
+                </div>
+            </div>
+        </div>
+        <br>
+        <br>
+        
+        
+</body>
